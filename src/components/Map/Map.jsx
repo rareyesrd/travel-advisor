@@ -6,11 +6,10 @@ import GoogleMapReact from "google-map-react";
 
 import useStyles from "./styles";
 
-const Map = () => {
+const Map = ({ setCoodinates, setBounds, coordinates }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery("(min-width: 600px)");
 
-  const coordinates = { lat: 0, lng: 0 };
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
@@ -20,7 +19,11 @@ const Map = () => {
         defaultZoom={14}
         margin={[50, 50, 50, 50]}
         option={""}
-        // onChange={""}
+        onChange={(e) => {
+          console.log(e);
+          setCoodinates({ lat: e.center.lat, lng: e.center.lng });
+          setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+        }}
         onChlidClik={""}
       ></GoogleMapReact>
     </div>

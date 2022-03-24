@@ -13,21 +13,7 @@ import {
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 import useStyles from "./styles.js";
 
-const List = () => {
-  const places = [
-    { name: "Cool Place" },
-    { name: "Best Beer" },
-    { name: "Excellent Coffee" },
-    { name: "Cool Place" },
-    { name: "Best Beer" },
-    { name: "Excellent Coffee" },
-    { name: "Cool Place" },
-    { name: "Best Beer" },
-    { name: "Excellent Coffee" },
-    { name: "Cool Place" },
-    { name: "Best Beer" },
-    { name: "Excellent Coffee" },
-  ];
+const List = ({ places }) => {
   const [type, setType] = useState([]);
   const [rating, setRating] = useState([]);
   const classes = useStyles();
