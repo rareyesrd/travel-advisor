@@ -9,10 +9,10 @@ export const getPlacesData = async (sw, ne) => {
       data: { data },
     } = await axios.get(URL, {
       params: {
-        bl_latitude: sw.latitude,
-        tr_latitude: ne.latitude,
-        bl_longitude: sw.longitude,
-        tr_longitude: ne.longitude,
+        bl_latitude: sw.lat,
+        tr_latitude: ne.lat,
+        bl_longitude: sw.lng,
+        tr_longitude: ne.lng,
       },
       headers: {
         "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",

@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from "react";
 
 import { CssBaseline, Grid } from "@material-ui/core";
-import { getPlacesData } from "./api";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import Map from "./components/Map/Map";
 
+import { getPlacesData } from "./api";
+
 const App = () => {
-  const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState();
+  const [bounds, setBounds] = useState({});
   const [places, setPlaces] = useState([]);
+  const [coords, setCoords] = useState({ lat: 0, lng: 0 });
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) =>
-        setCoordinates({ lat: latitude, lng: longitude })
+      ({ coords: { latitude, longitude } }) => {
+        setCoords({ lat: latitude, lng: longitude });
+      }
     );
   }, []);
 
   useEffect(() => {
-    console.log(coordinates, bounds);
-    getPlacesData(bounds.sw, bounds.ne).then((data) => {
-      console.log(data);
-      setPlaces(data);
-    });
-  }, [coordinates, bounds]);
+    getPlacesData(bounds.sw, bounds.ne).then((data) => setPlaces(data));
+  }, [coords, bounds]);
 
   return (
     <>
@@ -35,11 +33,7 @@ const App = () => {
           <List places={places} />
         </Grid>
         <Grid item xs={12} md={8}>
-          <Map
-            setCoodinates={setCoordinates}
-            setBounds={setBounds}
-            coordinates={coordinates}
-          />
+          <Map setCoords={setCoords} setBounds={setBounds} coords={coords} />
         </Grid>
       </Grid>
     </>
